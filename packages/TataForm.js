@@ -661,7 +661,7 @@ const TataForm = defineComponent({
         model: this.form,
         'label-width': this['label-width'] + 'px',
         ...this.options,
-      }
+      },
       ref: 'form',
       nativeOn: {
         submit(e) {

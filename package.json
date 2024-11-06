@@ -2,7 +2,7 @@
   "name": "tata-form",
   "version": "1.0.1",
   "description": "Configuration element form",
-  "main": "dist/tata-form.umd.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -27,8 +27,8 @@
   "author": "sunnyhills <634778445@qq.com>",
   "license": "MIT",
   "dependencies": {
-    "element-plus": "^2.8.7",
-    "vue": "^3.5.12"
+    "element-plus": "^2.2.20",
+    "vue": "^3.2.31"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
@@ -36,7 +36,7 @@
     "vite": "^5.4.10"
   },
   "peerDependencies": {
-    "vue": "^3.2.31",
-    "element-plus": "^2.2.20"
+    "element-plus": "^2.2.20",
+    "vue": "^3.2.31"
   }
 }

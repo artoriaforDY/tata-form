@@ -145,10 +145,16 @@ const TataForm = defineComponent({
           width,
         },
       }
+
+      const noOptArr = [
+        'checkbox-group',
+        'radio-group',
+        'select',
+      ]
       if (options) {
         if (tagType === 'tree-select') {
           obj.data = options
-        } else {
+        } else if (!noOptArr.includes(tagType)) {
           obj.options = options
         }
       }
@@ -424,9 +430,6 @@ const TataForm = defineComponent({
           disabled: option.disabled
         }
       }
-      let componnent = typeof item.renderOption === 'function'
-      ? item.renderOption(h, option, item)
-      : item.text
       let opts = []
       switch (item.type) {
         case 'select':
@@ -436,9 +439,7 @@ const TataForm = defineComponent({
               {
                 ...(optFn(option))
               },
-              [
-                componnent
-              ]
+              typeof item.renderOption === 'function' ? [item.renderOption(h, option, item)] : ''
             )
           })
           break;
@@ -449,9 +450,7 @@ const TataForm = defineComponent({
               {
                 ...(optFn(option))
               },
-              [
-                componnent
-              ]
+              typeof item.renderOption === 'function' ? [item.renderOption(h, option, item)] : ''
             )
           })
           break;
@@ -463,9 +462,7 @@ const TataForm = defineComponent({
               {
                 ...(optFn(option))
               },
-              [
-                componnent
-              ]
+              typeof item.renderOption === 'function' ? [item.renderOption(h, option, item)] : ''
             )
           })
           break;

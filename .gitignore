@@ -1,7 +1,5 @@
 .DS_Store
 node_modules/
-/dist
-dist.*
 .history
 .git/
 npm-debug.log*
@@ -22,6 +20,4 @@ package-lock.json
 .git/
 node_modules/
 package-lock.json
-/dist
-dist.*
 *.zip

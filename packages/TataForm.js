@@ -67,6 +67,7 @@ const TataForm = defineComponent({
   data() {
     return {
       form: this.initForm(),
+      refObj: {}
     }
   },
   computed: {
@@ -161,23 +162,21 @@ const TataForm = defineComponent({
       if (tagType === 'input') {
         obj.onInput = (value) => {
           console.log('input', value)
-          let refObj = {};
           if (item.ref) {
-            refObj[item.ref] = this.$refs[item.ref];
+            this.refObj[item.ref] = this.$refs[item.ref];
           }
           this.form[item.key] = value;
-          this.emitInput(value, item, refObj);
+          this.emitInput(value, item, this.refObj);
         }
       } else {
         obj.onChange = (value) => {
           console.log('input', value)
           value = this.formatDateValue(value, item);
-          let refObj = {};
           if (item.ref) {
-            refObj[item.ref] = this.$refs[item.ref];
+            this.refObj[item.ref] = this.$refs[item.ref];
           }
           this.form[item.key] = value;
-          this.emitInput(value, item, refObj);
+          this.emitInput(value, item, this.refObj);
         }
       }
       for (let key in itemOn) {

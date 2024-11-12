@@ -1,8 +1,8 @@
 {
   "name": "tata-form",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Configuration element form",
-  "main": "src/index.js",
+  "main": "dist/tata-form.es.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

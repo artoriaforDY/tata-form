@@ -1,27 +1,27 @@
-import { defineComponent as m, h as n } from "vue";
-import { ElForm as c, ElFormItem as k, ElInput as F, ElInputNumber as E, ElAutocomplete as O, ElSelect as L, ElOption as S, ElSelectV2 as R, ElTreeSelect as x, ElCheckboxGroup as A, ElCheckbox as I, ElRadioGroup as T, ElRadio as C, ElRadioButton as B, ElDatePicker as P, ElTimePicker as $, ElTimeSelect as j, ElCascader as V, ElSlider as N, ElSwitch as q } from "element-plus";
+import { defineComponent as w, h as n } from "vue";
+import { ElForm as c, ElFormItem as m, ElInput as k, ElInputNumber as F, ElAutocomplete as E, ElSelect as O, ElOption as L, ElSelectV2 as S, ElTreeSelect as R, ElCheckboxGroup as x, ElCheckbox as A, ElRadioGroup as I, ElRadio as T, ElRadioButton as C, ElDatePicker as B, ElTimePicker as P, ElTimeSelect as $, ElCascader as j, ElSlider as V, ElSwitch as N } from "element-plus";
 const d = (e) => ({
   form: c,
-  "form-item": k,
-  input: F,
-  "input-number": E,
-  autocomplete: O,
-  select: L,
-  option: S,
-  "select-v2": R,
-  "tree-select": x,
-  "checkbox-group": A,
-  checkbox: I,
-  "radio-group": T,
-  radio: C,
-  "radio-button": B,
-  "date-picker": P,
-  "time-picker": $,
-  "time-select": j,
-  cascader: V,
-  slider: N,
-  switch: q
-})[e], M = m({
+  "form-item": m,
+  input: k,
+  "input-number": F,
+  autocomplete: E,
+  select: O,
+  option: L,
+  "select-v2": S,
+  "tree-select": R,
+  "checkbox-group": x,
+  checkbox: A,
+  "radio-group": I,
+  radio: T,
+  "radio-button": C,
+  "date-picker": B,
+  "time-picker": P,
+  "time-select": $,
+  cascader: j,
+  slider: V,
+  switch: N
+})[e], D = w({
   name: "TataForm",
   props: {
     formList: {
@@ -114,7 +114,7 @@ const d = (e) => ({
         key: e.key,
         style: {}
       };
-      e.width && (i.style.width = typeof w == "string" ? w : w + "px"), o && (s === "tree-select" ? i.data = o : [
+      e.width && (i.style.width = typeof e.width == "string" ? e.width : e.width + "px"), o && (s === "tree-select" ? i.data = o : [
         "checkbox-group",
         "radio-group",
         "select"
@@ -362,5 +362,5 @@ const d = (e) => ({
   }
 });
 export {
-  M as TataForm
+  D as TataForm
 };

@@ -140,7 +140,7 @@ const TataForm = defineComponent({
       }
 
       if (item.width) {
-        obj.style.width = typeof w === 'string' ? w : (w + 'px')
+        obj.style.width = typeof item.width === 'string' ? item.width : (item.width + 'px')
       }
 
       const noOptArr = [

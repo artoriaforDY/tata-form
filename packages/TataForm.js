@@ -44,12 +44,12 @@ const TataForm = defineComponent({
       type: [Array, Number],
     },
     // 默认标签宽度
-    'label-width': {
+    labelWidth: {
       type: Number,
       default: 100,
     },
     // 默认内容宽度
-    'content-width': {
+    contentWidth: {
       type: [Number, String],
       default: 240,
     },
@@ -128,14 +128,7 @@ const TataForm = defineComponent({
         disabled: this.disabled || disabled,
       };
       let attrs = item.attrs || {};
-      let width = null;
 
-      let w = item.width || this.contentWidth;
-      if (typeof w === 'string' && (w.indexOf('%') >= 0 || w === 'auto')) {
-        width = w;
-      } else {
-        width = w + 'px';
-      }
       let itemOn = item.on || {}
 
       let obj = {
@@ -143,8 +136,11 @@ const TataForm = defineComponent({
         ...attrs,
         key: item.key,
         style: {
-          width,
         },
+      }
+
+      if (item.width) {
+        obj.style.width = typeof w === 'string' ? w : (w + 'px')
       }
 
       const noOptArr = [
@@ -351,9 +347,13 @@ const TataForm = defineComponent({
       if (typeof item.render === 'function') {
         return item.render(h, item, this.form)
       } else {
+        let w = this.contentWidth
         let settings = {
           prop: item.key,
           label: item.title,
+          style: {
+            width: typeof w === 'string' ? w : (w + 'px')
+          },
           ...item.settings
         }
         return h(
@@ -475,7 +475,7 @@ const TataForm = defineComponent({
     console.log('执行了render')
     return h(ElForm, {
       model: this.form,
-      'label-width': this['labelWidth'] + 'px',
+      'label-width': typeof this.labelWidth === 'string' ? this.labelWidth : (this.labelWidth + 'px'),
       ...this.options,
       rules: this.rules,
       ref: 'form',

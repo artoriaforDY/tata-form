@@ -1,27 +1,29 @@
 import { defineComponent as w, h as n } from "vue";
-import { ElForm as c, ElFormItem as m, ElInput as k, ElInputNumber as F, ElAutocomplete as E, ElSelect as O, ElOption as L, ElSelectV2 as S, ElTreeSelect as R, ElCheckboxGroup as x, ElCheckbox as A, ElRadioGroup as I, ElRadio as T, ElRadioButton as C, ElDatePicker as B, ElTimePicker as P, ElTimeSelect as $, ElCascader as j, ElSlider as V, ElSwitch as N } from "element-plus";
+import { ElForm as c, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as O, ElAutocomplete as L, ElSelect as R, ElOption as S, ElSelectV2 as x, ElTreeSelect as A, ElCheckboxGroup as I, ElCheckbox as T, ElRadioGroup as C, ElRadio as B, ElRadioButton as P, ElDatePicker as $, ElTimePicker as j, ElTimeSelect as V, ElCascader as N, ElSlider as q, ElSwitch as W } from "element-plus";
 const d = (e) => ({
+  row: m,
+  col: k,
   form: c,
-  "form-item": m,
-  input: k,
-  "input-number": F,
-  autocomplete: E,
-  select: O,
-  option: L,
-  "select-v2": S,
-  "tree-select": R,
-  "checkbox-group": x,
-  checkbox: A,
-  "radio-group": I,
-  radio: T,
-  "radio-button": C,
-  "date-picker": B,
-  "time-picker": P,
-  "time-select": $,
-  cascader: j,
-  slider: V,
-  switch: N
-})[e], D = w({
+  "form-item": F,
+  input: E,
+  "input-number": O,
+  autocomplete: L,
+  select: R,
+  option: S,
+  "select-v2": x,
+  "tree-select": A,
+  "checkbox-group": I,
+  checkbox: T,
+  "radio-group": C,
+  radio: B,
+  "radio-button": P,
+  "date-picker": $,
+  "time-picker": j,
+  "time-select": V,
+  cascader: N,
+  slider: q,
+  switch: W
+})[e], v = w({
   name: "TataForm",
   props: {
     formList: {
@@ -44,7 +46,7 @@ const d = (e) => ({
     // 默认内容宽度
     contentWidth: {
       type: [Number, String],
-      default: 240
+      default: "100%"
     },
     // 开启全局 clearable
     clearable: {
@@ -362,5 +364,5 @@ const d = (e) => ({
   }
 });
 export {
-  D as TataForm
+  v as TataForm
 };

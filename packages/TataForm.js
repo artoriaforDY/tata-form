@@ -4,6 +4,8 @@ import { ElForm, ElFormItem, ElInput, ElInputNumber, ElAutocomplete, ElSelect, E
 
 const getPrefix = (tag) => {
   const elementMap = {
+    'row': ElRow,
+    'col': ElCol,
     'form': ElForm,
     'form-item': ElFormItem,
     'input': ElInput,
@@ -51,7 +53,7 @@ const TataForm = defineComponent({
     // 默认内容宽度
     contentWidth: {
       type: [Number, String],
-      default: 240,
+      default: '100%',
     },
     // 开启全局 clearable
     clearable: {

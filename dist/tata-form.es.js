@@ -145,7 +145,7 @@ const d = (e) => ({
     },
     async submit() {
       const e = await this.$refs.form.validate();
-      this.$emit("submit", this.getForm(), e, this.$refs);
+      this.$emit("submitTataForm", this.getForm(), e, this.$refs);
     },
     reset(e) {
       this.clear(), this.form = this.initForm(e), this.$refs.form.resetFields();

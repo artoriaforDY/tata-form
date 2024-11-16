@@ -137,8 +137,7 @@ const TataForm = defineComponent({
         ...currProps,
         ...attrs,
         key: item.key,
-        style: {
-        },
+        style: {},
       }
 
       if (item.width) {
@@ -216,7 +215,7 @@ const TataForm = defineComponent({
     },
     async submit() {
       const valid = await this.$refs.form.validate();
-      this.$emit('submit', this.getForm(), valid, this.$refs);
+      this.$emit('submitTataForm', this.getForm(), valid, this.$refs);
     },
     reset(isExclude) {
       this.clear();

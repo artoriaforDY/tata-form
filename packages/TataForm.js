@@ -86,7 +86,6 @@ const TataForm = defineComponent({
   methods: {
     // 默认值
     initForm(isExclude) {
-      console.log('执行了initForm')
       if (!Array.isArray(this.formList)) {
         console.error('formList must be an array');
         return {};
@@ -117,7 +116,6 @@ const TataForm = defineComponent({
           form[item.key] = isExclude && disabled ? form[item.key] : defaultValue;
         }
       })
-      console.log('form===>', form)
       return form
     },
     // 生产 tag
@@ -158,7 +156,6 @@ const TataForm = defineComponent({
       }
       if (tagType === 'input') {
         obj.onInput = (value) => {
-          console.log('input', value)
           if (item.ref) {
             this.refObj[item.ref] = this.$refs[item.ref];
           }
@@ -167,7 +164,6 @@ const TataForm = defineComponent({
         }
       } else {
         obj.onChange = (value) => {
-          console.log('input', value)
           value = this.formatDateValue(value, item);
           if (item.ref) {
             this.refObj[item.ref] = this.$refs[item.ref];
@@ -205,7 +201,6 @@ const TataForm = defineComponent({
       } else if (['daterange', 'datetimerange'].includes(item.type)) {
         return value ? value : ['', ''];
       }
-      console.log('formatDateValue', value)
       return value;
     },
     emitInput(value, item, refObj) {
@@ -473,7 +468,6 @@ const TataForm = defineComponent({
     },
   },
   render() {
-    console.log('执行了render')
     return h(ElForm, {
       model: this.form,
       'label-width': typeof this.labelWidth === 'string' ? this.labelWidth : (this.labelWidth + 'px'),

@@ -154,24 +154,22 @@ const TataForm = defineComponent({
           obj.options = options
         }
       }
+
+      const handleEvent = (value, item) => {
+        value = this.formatDateValue(value, item);
+        if (item.ref) {
+          this.refObj[item.ref] = this.$refs[item.ref];
+        }
+        this.form[item.key] = value;
+        this.emitInput(value, item, this.refObj);
+      };
+
       if (tagType === 'input') {
-        obj.onInput = (value) => {
-          if (item.ref) {
-            this.refObj[item.ref] = this.$refs[item.ref];
-          }
-          this.form[item.key] = value;
-          this.emitInput(value, item, this.refObj);
-        }
+        obj.onInput = (value) => handleEvent(value, item);
       } else {
-        obj.onChange = (value) => {
-          value = this.formatDateValue(value, item);
-          if (item.ref) {
-            this.refObj[item.ref] = this.$refs[item.ref];
-          }
-          this.form[item.key] = value;
-          this.emitInput(value, item, this.refObj);
-        }
+        obj.onChange = (value) => handleEvent(value, item);
       }
+
       for (let key in itemOn) {
         const createFn = (fn) => {
           return (...args) => {
@@ -330,15 +328,20 @@ const TataForm = defineComponent({
       let content
       if (typeof item.renderContent === 'function') {
         content = item.renderContent(h, item, this.form)
+        // 检查返回值是否为 Promise
+        // if (content instanceof Promise) {
+        //   // 如果是 Promise，等待其解析
+        //   content = await content;
+        // }
       } else {
         content = this.renderTagByName(item, item.type)
       }
       return content
     },
     getFormItem(item, content) {
-      if (item.isShow === false) return;
-      else if (typeof item.isShow === 'function' && item.isShow(this.form, item) === false) {
-        return;
+      if (item.isShow === false) return null
+      if (typeof item.isShow === 'function' && item.isShow(this.form, item) === false) {
+        return null
       }
       if (typeof item.render === 'function') {
         return item.render(h, item, this.form)
@@ -473,13 +476,7 @@ const TataForm = defineComponent({
       'label-width': typeof this.labelWidth === 'string' ? this.labelWidth : (this.labelWidth + 'px'),
       ...this.options,
       rules: this.rules,
-      ref: 'form',
-      nativeOn: {
-        submit(e) {
-          e.preventDefault()
-          e.stopPropagation()
-        },
-      },
+      ref: 'form'
     }, () => [
       this.renderFormList(h),
       this.$slots.default?.()

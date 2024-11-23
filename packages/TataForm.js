@@ -124,6 +124,7 @@ const TataForm = defineComponent({
 
       let currProps = {
         'model-value': this.form[item.key],
+        clearable: true,
         ...(item.props || {}),
         disabled: this.disabled || disabled,
       };
@@ -170,14 +171,17 @@ const TataForm = defineComponent({
         obj.onChange = (value) => handleEvent(value, item);
       }
 
-      for (let key in itemOn) {
-        const createFn = (fn) => {
-          return (...args) => {
-            // 为自定义事件新增参数
-            fn(...args, item, this.form);
-          };
+      const createFn = (fn) => {
+        return (...args) => {
+          // 为自定义事件新增参数
+          fn(...args, item, this.form);
         };
-        obj[key] = createFn(itemOn[key])
+      };
+      const getUpStr = (str) => {
+        return 'on' + str.charAt(0).toUpperCase() + str.slice(1)
+      };
+      for (let key in itemOn) {
+        obj[getUpStr(key)] = createFn(itemOn[key])
       }
       if (item.hasOwnProperty('ref')) {
         obj.ref = item.ref;
@@ -350,18 +354,22 @@ const TataForm = defineComponent({
         let settings = {
           prop: item.key,
           label: item.title,
+          required: !!this.isRequired(item),
           style: {
             width: typeof w === 'string' ? w : (w + 'px')
           },
           ...item.settings
         }
+        let obj = {
+          default: () => [content]
+        }
+        if (item.renderTitle) {
+          obj.label = () => this.renderTitle(h, item, this.form)
+        }
         return h(
           getPrefix('form-item'),
           settings,
-          {
-            label: () => this.renderTitle(h, item, this.form),
-            default: () => [content]
-          }
+          obj
         )
       }
     },
@@ -376,23 +384,11 @@ const TataForm = defineComponent({
     // 渲染 title
     renderTitle(h, item) {
       if (item.renderTitle) {
-        let tip = !!this.isRequired(item) ? h('span', { style: 'color: red' }, '*') : ''
-
         let renderBox = typeof item.renderTitle === 'function' ? item.renderTitle(h, item, this.form) : item.title
 
-        return h(
-          'span',
-          [
-            tip, renderBox
-          ]
-        );
+        return renderBox
       } else if (item.title) {
-        return h(
-          'span',
-          [
-            item.title
-          ]
-        );
+        return item.title
       } else {
         return ''
       }

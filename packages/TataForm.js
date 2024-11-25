@@ -20,8 +20,8 @@ const getPrefix = (tag) => {
     'radio-group': ElRadioGroup,
     'radio': ElRadio,
     'radio-button': ElRadioButton,
-    'date-picker': ElDatePicker,
-    'time-picker': ElTimePicker,
+    'date': ElDatePicker,
+    'time': ElTimePicker,
     'time-select': ElTimeSelect,
     'cascader': ElCascader,
     'slider': ElSlider,
@@ -47,7 +47,7 @@ const TataForm = defineComponent({
     },
     // 默认标签宽度
     labelWidth: {
-      type: Number,
+      type: [String, Number],
       default: 100,
     },
     // 默认内容宽度
@@ -101,16 +101,23 @@ const TataForm = defineComponent({
         'checkbox-group': [],
         'radio-group': '',
         'date': '',
-        'datetime': '',
-        'daterange': [],
-        'datetimerange': [],
+        'time': '',
         'time-select': '',
         'cascader': [],
         'slider': 0,
         'switch': false,
       }
       this.formList.forEach((item) => {
-        let defaultValue = item.defaultValue !== undefined ? item.defaultValue : map[item.type];
+        let defaultValue = item.defaultValue ? item.defaultValue : map[item.type];
+        if (item.type === 'date') {
+          if (item.props?.type && item.props?.type?.indexOf('range') !== -1) {
+            defaultValue = []
+          }
+        } else if (item.type === 'time') {
+          if (item.props?.type?.isRange) {
+            defaultValue = ['', '']
+          }
+        }
         if (item.key) {
           let disabled = typeof item.disabled == 'function' ? item.disabled(this.form, item) : item.disabled;
           form[item.key] = isExclude && disabled ? form[item.key] : defaultValue;
@@ -137,6 +144,9 @@ const TataForm = defineComponent({
         ...attrs,
         key: item.key,
         style: {},
+        'onUpdate:modelValue': (value) => {
+          this.form[item.key] = value
+        }
       }
 
       if (item.width) {
@@ -157,7 +167,7 @@ const TataForm = defineComponent({
       }
 
       const handleEvent = (value, item) => {
-        value = this.formatDateValue(value, item);
+        // value = this.formatDateValue(value, item);
         if (item.ref) {
           this.refObj[item.ref] = this.$refs[item.ref];
         }
@@ -168,9 +178,8 @@ const TataForm = defineComponent({
       if (tagType === 'input') {
         obj.onInput = (value) => handleEvent(value, item);
       } else {
-        obj.onChange = (value) => handleEvent(value, item);
+        obj.onChange = (value) => handleEvent(value, item)
       }
-
       const createFn = (fn) => {
         return (...args) => {
           // 为自定义事件新增参数
@@ -198,10 +207,14 @@ const TataForm = defineComponent({
       }
     },
     formatDateValue(value, item) {
-      if (['date', 'datetime'].includes(item.type)) {
-        return value ? value : '';
-      } else if (['daterange', 'datetimerange'].includes(item.type)) {
-        return value ? value : ['', ''];
+      if (item.type === 'date') {
+        if (item.props?.type?.indexOf('range') !== -1) {
+          return ['', '']
+        } else {
+          return value
+        }
+      } else if (item.type === 'time') {
+        return item.props?.type?.isRange ? value : ['', ''];
       }
       return value;
     },
@@ -338,7 +351,7 @@ const TataForm = defineComponent({
         //   content = await content;
         // }
       } else {
-        content = this.renderTagByName(item, item.type)
+        content = this.renderTagByName(item)
       }
       return content
     },
@@ -350,7 +363,7 @@ const TataForm = defineComponent({
       if (typeof item.render === 'function') {
         return item.render(h, item, this.form)
       } else {
-        let w = this.contentWidth
+        let w = item.itemWidth || this.contentWidth
         let settings = {
           prop: item.key,
           label: item.title,
@@ -409,6 +422,9 @@ const TataForm = defineComponent({
         tagType: item.type,
         tagName: getPrefix(item.type),
       }
+
+      // date date-picker
+      // date date-picker
       if (childrenArr.includes(item.type)) {
         tag.options = this.renderTagChildren(item)
       } else if (optsArr.includes(item.type)) {

@@ -246,6 +246,9 @@ const TataForm = defineComponent({
         this.form[key] = form[key];
       }
     },
+    async validate(){
+      return await this.$refs.form.validate();
+    },
     validateField(props, callback) {
       return this.$refs.form.validateField(props, callback);
     },

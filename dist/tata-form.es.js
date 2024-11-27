@@ -1,5 +1,5 @@
 import { defineComponent as w, h as a } from "vue";
-import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as R, ElAutocomplete as S, ElSelect as O, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as P, ElDatePicker as v, ElTimePicker as $, ElTimeSelect as j, ElCascader as q, ElSlider as N, ElSwitch as V } from "element-plus";
+import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as R, ElAutocomplete as S, ElSelect as O, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as v, ElDatePicker as P, ElTimePicker as $, ElTimeSelect as j, ElCascader as q, ElSlider as N, ElSwitch as V } from "element-plus";
 const p = (e) => ({
   row: m,
   col: k,
@@ -16,8 +16,8 @@ const p = (e) => ({
   checkbox: C,
   "radio-group": I,
   radio: B,
-  "radio-button": P,
-  date: v,
+  "radio-button": v,
+  date: P,
   time: $,
   "time-select": j,
   cascader: q,
@@ -95,9 +95,9 @@ const p = (e) => ({
         switch: !1
       };
       return this.formList.forEach((o) => {
-        var n, f, u, l, d;
+        var i, f, u, l, d;
         let r = o.defaultValue ? o.defaultValue : s[o.type];
-        if (o.type === "date" ? (n = o.props) != null && n.type && ((u = (f = o.props) == null ? void 0 : f.type) == null ? void 0 : u.indexOf("range")) !== -1 && (r = []) : o.type === "time" && (d = (l = o.props) == null ? void 0 : l.type) != null && d.isRange && (r = ["", ""]), o.key) {
+        if (o.type === "date" ? (i = o.props) != null && i.type && ((u = (f = o.props) == null ? void 0 : f.type) == null ? void 0 : u.indexOf("range")) !== -1 && (r = []) : o.type === "time" && (d = (l = o.props) == null ? void 0 : l.type) != null && d.isRange && (r = ["", ""]), o.key) {
           let h = typeof o.disabled == "function" ? o.disabled(this.form, o) : o.disabled;
           t[o.key] = e && h ? t[o.key] : r;
         }
@@ -105,18 +105,18 @@ const p = (e) => ({
     },
     // 生产 tag
     generateTag({ item: e, tagName: t, tagType: s, options: o }) {
-      let r = typeof e.disabled == "function" ? e.disabled(this.form, o) : e.disabled, n = {
+      let r = typeof e.disabled == "function" ? e.disabled(this.form, o) : e.disabled, i = {
         "model-value": this.form[e.key],
         clearable: !0,
         ...e.props || {},
         disabled: this.disabled || r
       }, f = e.attrs || {}, u = e.on || {}, l = {
-        ...n,
+        ...i,
         ...f,
         key: e.key,
         style: {},
-        "onUpdate:modelValue": (i) => {
-          this.form[e.key] = i;
+        "onUpdate:modelValue": (n) => {
+          this.form[e.key] = n;
         }
       };
       e.width && (l.style.width = typeof e.width == "string" ? e.width : e.width + "px"), o && (s === "tree-select" ? l.data = o : [
@@ -124,15 +124,15 @@ const p = (e) => ({
         "radio-group",
         "select"
       ].includes(s) || (l.options = o));
-      const h = (i, c) => {
-        c.ref && (this.refObj[c.ref] = this.$refs[c.ref]), this.form[c.key] = i, this.emitInput(i, c, this.refObj);
+      const h = (n, c) => {
+        c.ref && (this.refObj[c.ref] = this.$refs[c.ref]), this.form[c.key] = n, this.emitInput(n, c, this.refObj);
       };
-      s === "input" ? l.onInput = (i) => h(i, e) : l.onChange = (i) => h(i, e);
-      const y = (i) => (...c) => {
-        i(...c, e, this.form);
-      }, b = (i) => "on" + i.charAt(0).toUpperCase() + i.slice(1);
-      for (let i in u)
-        l[b(i)] = y(u[i]);
+      s === "input" ? l.onInput = (n) => h(n, e) : l.onChange = (n) => h(n, e);
+      const y = (n) => (...c) => {
+        n(...c, e, this.form);
+      }, b = (n) => "on" + n.charAt(0).toUpperCase() + n.slice(1);
+      for (let n in u)
+        l[b(n)] = y(u[n]);
       return e.hasOwnProperty("ref") && (l.ref = e.ref), [
         "select-v2",
         "tree-select",
@@ -140,8 +140,8 @@ const p = (e) => ({
       ].includes(e.type) ? a(t, l) : a(t, l, o);
     },
     formatDateValue(e, t) {
-      var s, o, r, n;
-      return t.type === "date" ? ((o = (s = t.props) == null ? void 0 : s.type) == null ? void 0 : o.indexOf("range")) !== -1 ? ["", ""] : e : t.type === "time" ? (n = (r = t.props) == null ? void 0 : r.type) != null && n.isRange ? e : ["", ""] : e;
+      var s, o, r, i;
+      return t.type === "date" ? ((o = (s = t.props) == null ? void 0 : s.type) == null ? void 0 : o.indexOf("range")) !== -1 ? ["", ""] : e : t.type === "time" ? (i = (r = t.props) == null ? void 0 : r.type) != null && i.isRange ? e : ["", ""] : e;
     },
     emitInput(e, t, s) {
       typeof t.onInput == "function" && t.onInput(e, t, this.form, s);
@@ -166,6 +166,9 @@ const p = (e) => ({
       for (let t in e)
         this.form[t] = e[t];
     },
+    async validate() {
+      return await this.$refs.form.validate();
+    },
     validateField(e, t) {
       return this.$refs.form.validateField(e, t);
     },
@@ -181,11 +184,11 @@ const p = (e) => ({
       let t = [], s = ~~Math.abs(this.grid);
       s < 1 && (s = 1);
       let o = this.formList.filter((r) => {
-        let n = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
-        return !(!n && !f);
+        let i = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
+        return !(!i && !f);
       });
       for (let r = 0; r < o.length; r += s) {
-        let n = [];
+        let i = [];
         for (let u = 0; u < s && r + u < o.length; u++) {
           let l = o[r + u];
           if (!l) break;
@@ -199,9 +202,9 @@ const p = (e) => ({
             },
             [d]
           );
-          n.push(h);
+          i.push(h);
         }
-        let f = this.getRow(n);
+        let f = this.getRow(i);
         t.push(f);
       }
       return t;
@@ -209,11 +212,11 @@ const p = (e) => ({
     // 当 grid 为一维数组时
     getFormListByArray(e) {
       let t = [], s = 0, o = this.formList.filter((r) => {
-        let n = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
-        return !(!n && !f);
+        let i = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
+        return !(!i && !f);
       });
       for (let r = 0; r < o.length; ) {
-        let n = [], f = this.grid[s];
+        let i = [], f = this.grid[s];
         for (let l = 0; l < f; l++) {
           let d = o[r + l];
           if (!d) break;
@@ -227,9 +230,9 @@ const p = (e) => ({
             },
             [h]
           );
-          n.push(y);
+          i.push(y);
         }
-        let u = this.getRow(n);
+        let u = this.getRow(i);
         t.push(u), s += 1, r += f;
       }
       return t;

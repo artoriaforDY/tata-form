@@ -39,7 +39,7 @@ const TataForm = defineComponent({
     },
     options: {
       type: Object,
-      required: true
+      default: () => {}
     },
     // 是否启用 grid 布局
     grid: {

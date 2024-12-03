@@ -1,5 +1,5 @@
 import { defineComponent as w, h as a } from "vue";
-import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as R, ElAutocomplete as S, ElSelect as O, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as v, ElDatePicker as P, ElTimePicker as $, ElTimeSelect as j, ElCascader as q, ElSlider as N, ElSwitch as V } from "element-plus";
+import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as R, ElAutocomplete as S, ElSelect as O, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as v, ElDatePicker as P, ElTimePicker as $, ElTimeSelect as j, ElCascader as N, ElSlider as V, ElSwitch as q } from "element-plus";
 const p = (e) => ({
   row: m,
   col: k,
@@ -20,9 +20,9 @@ const p = (e) => ({
   date: P,
   time: $,
   "time-select": j,
-  cascader: q,
-  slider: N,
-  switch: V
+  cascader: N,
+  slider: V,
+  switch: q
 })[e], D = w({
   name: "TataForm",
   props: {
@@ -32,7 +32,8 @@ const p = (e) => ({
     },
     options: {
       type: Object,
-      required: !0
+      default: () => {
+      }
     },
     // 是否启用 grid 布局
     grid: {
@@ -95,9 +96,9 @@ const p = (e) => ({
         switch: !1
       };
       return this.formList.forEach((o) => {
-        var i, f, u, l, d;
+        var n, f, u, l, d;
         let r = o.defaultValue ? o.defaultValue : s[o.type];
-        if (o.type === "date" ? (i = o.props) != null && i.type && ((u = (f = o.props) == null ? void 0 : f.type) == null ? void 0 : u.indexOf("range")) !== -1 && (r = []) : o.type === "time" && (d = (l = o.props) == null ? void 0 : l.type) != null && d.isRange && (r = ["", ""]), o.key) {
+        if (o.type === "date" ? (n = o.props) != null && n.type && ((u = (f = o.props) == null ? void 0 : f.type) == null ? void 0 : u.indexOf("range")) !== -1 && (r = []) : o.type === "time" && (d = (l = o.props) == null ? void 0 : l.type) != null && d.isRange && (r = ["", ""]), o.key) {
           let h = typeof o.disabled == "function" ? o.disabled(this.form, o) : o.disabled;
           t[o.key] = e && h ? t[o.key] : r;
         }
@@ -105,18 +106,18 @@ const p = (e) => ({
     },
     // 生产 tag
     generateTag({ item: e, tagName: t, tagType: s, options: o }) {
-      let r = typeof e.disabled == "function" ? e.disabled(this.form, o) : e.disabled, i = {
+      let r = typeof e.disabled == "function" ? e.disabled(this.form, o) : e.disabled, n = {
         "model-value": this.form[e.key],
         clearable: !0,
         ...e.props || {},
         disabled: this.disabled || r
       }, f = e.attrs || {}, u = e.on || {}, l = {
-        ...i,
+        ...n,
         ...f,
         key: e.key,
         style: {},
-        "onUpdate:modelValue": (n) => {
-          this.form[e.key] = n;
+        "onUpdate:modelValue": (i) => {
+          this.form[e.key] = i;
         }
       };
       e.width && (l.style.width = typeof e.width == "string" ? e.width : e.width + "px"), o && (s === "tree-select" ? l.data = o : [
@@ -124,15 +125,15 @@ const p = (e) => ({
         "radio-group",
         "select"
       ].includes(s) || (l.options = o));
-      const h = (n, c) => {
-        c.ref && (this.refObj[c.ref] = this.$refs[c.ref]), this.form[c.key] = n, this.emitInput(n, c, this.refObj);
+      const h = (i, c) => {
+        c.ref && (this.refObj[c.ref] = this.$refs[c.ref]), this.form[c.key] = i, this.emitInput(i, c, this.refObj);
       };
-      s === "input" ? l.onInput = (n) => h(n, e) : l.onChange = (n) => h(n, e);
-      const y = (n) => (...c) => {
-        n(...c, e, this.form);
-      }, b = (n) => "on" + n.charAt(0).toUpperCase() + n.slice(1);
-      for (let n in u)
-        l[b(n)] = y(u[n]);
+      s === "input" ? l.onInput = (i) => h(i, e) : l.onChange = (i) => h(i, e);
+      const y = (i) => (...c) => {
+        i(...c, e, this.form);
+      }, b = (i) => "on" + i.charAt(0).toUpperCase() + i.slice(1);
+      for (let i in u)
+        l[b(i)] = y(u[i]);
       return e.hasOwnProperty("ref") && (l.ref = e.ref), [
         "select-v2",
         "tree-select",
@@ -140,8 +141,8 @@ const p = (e) => ({
       ].includes(e.type) ? a(t, l) : a(t, l, o);
     },
     formatDateValue(e, t) {
-      var s, o, r, i;
-      return t.type === "date" ? ((o = (s = t.props) == null ? void 0 : s.type) == null ? void 0 : o.indexOf("range")) !== -1 ? ["", ""] : e : t.type === "time" ? (i = (r = t.props) == null ? void 0 : r.type) != null && i.isRange ? e : ["", ""] : e;
+      var s, o, r, n;
+      return t.type === "date" ? ((o = (s = t.props) == null ? void 0 : s.type) == null ? void 0 : o.indexOf("range")) !== -1 ? ["", ""] : e : t.type === "time" ? (n = (r = t.props) == null ? void 0 : r.type) != null && n.isRange ? e : ["", ""] : e;
     },
     emitInput(e, t, s) {
       typeof t.onInput == "function" && t.onInput(e, t, this.form, s);
@@ -184,11 +185,11 @@ const p = (e) => ({
       let t = [], s = ~~Math.abs(this.grid);
       s < 1 && (s = 1);
       let o = this.formList.filter((r) => {
-        let i = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
-        return !(!i && !f);
+        let n = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
+        return !(!n && !f);
       });
       for (let r = 0; r < o.length; r += s) {
-        let i = [];
+        let n = [];
         for (let u = 0; u < s && r + u < o.length; u++) {
           let l = o[r + u];
           if (!l) break;
@@ -202,9 +203,9 @@ const p = (e) => ({
             },
             [d]
           );
-          i.push(h);
+          n.push(h);
         }
-        let f = this.getRow(i);
+        let f = this.getRow(n);
         t.push(f);
       }
       return t;
@@ -212,11 +213,11 @@ const p = (e) => ({
     // 当 grid 为一维数组时
     getFormListByArray(e) {
       let t = [], s = 0, o = this.formList.filter((r) => {
-        let i = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
-        return !(!i && !f);
+        let n = typeof r.isShow == "function" ? r.isShow(this.form, r) : r.hasOwnProperty("isShow") ? !!r.isShow : !0, f = typeof r.hasRow == "function" ? r.hasRow(this.form, r) : r.hasOwnProperty("hasRow") ? !!r.hasRow : !0;
+        return !(!n && !f);
       });
       for (let r = 0; r < o.length; ) {
-        let i = [], f = this.grid[s];
+        let n = [], f = this.grid[s];
         for (let l = 0; l < f; l++) {
           let d = o[r + l];
           if (!d) break;
@@ -230,9 +231,9 @@ const p = (e) => ({
             },
             [h]
           );
-          i.push(y);
+          n.push(y);
         }
-        let u = this.getRow(i);
+        let u = this.getRow(n);
         t.push(u), s += 1, r += f;
       }
       return t;

@@ -203,7 +203,7 @@ const TataForm = defineComponent({
       if (optsArr.includes(item.type)) {
         return h(tagName, obj);
       } else {
-        return h(tagName, obj, options);
+        return h(tagName, obj, () => options);
       }
     },
     formatDateValue(value, item) {

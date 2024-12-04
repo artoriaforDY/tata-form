@@ -138,7 +138,7 @@ const p = (e) => ({
         "select-v2",
         "tree-select",
         "cascader"
-      ].includes(e.type) ? a(t, l) : a(t, l, o);
+      ].includes(e.type) ? a(t, l) : a(t, l, () => o);
     },
     formatDateValue(e, t) {
       var s, o, r, n;

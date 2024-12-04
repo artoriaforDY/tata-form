@@ -246,7 +246,7 @@ const p = (e) => ({
     },
     getContent(e) {
       let t = "";
-      return typeof e.renderContent == "function" ? t = e.renderContent(a, e, this.form) : t = !e.key || !e.type ? "" : this.renderTagByName(e), t;
+      return typeof e.renderContent == "function" ? t = e.renderContent(a, e, this.form) : t = !e.key && !e.type ? "" : this.renderTagByName(e), t;
     },
     getFormItem(e, t) {
       if (e.isShow === !1 || typeof e.isShow == "function" && e.isShow(this.form, e) === !1)

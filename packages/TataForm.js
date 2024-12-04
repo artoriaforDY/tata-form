@@ -354,7 +354,7 @@ const TataForm = defineComponent({
         //   content = await content;
         // }
       } else {
-        content = !item.key || !item.type ? '' : this.renderTagByName(item)
+        content = !item.key && !item.type ? '' : this.renderTagByName(item)
       }
       return content
     },

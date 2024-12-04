@@ -345,7 +345,7 @@ const TataForm = defineComponent({
       )
     },
     getContent(item) {
-      let content
+      let content = ''
       if (typeof item.renderContent === 'function') {
         content = item.renderContent(h, item, this.form)
         // 检查返回值是否为 Promise
@@ -354,7 +354,7 @@ const TataForm = defineComponent({
         //   content = await content;
         // }
       } else {
-        content = this.renderTagByName(item)
+        content = !item.key || !item.type ? '' : this.renderTagByName(item)
       }
       return content
     },
@@ -426,8 +426,6 @@ const TataForm = defineComponent({
         tagName: getPrefix(item.type),
       }
 
-      // date date-picker
-      // date date-picker
       if (childrenArr.includes(item.type)) {
         tag.options = this.renderTagChildren(item)
       } else if (optsArr.includes(item.type)) {

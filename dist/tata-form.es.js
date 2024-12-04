@@ -1,14 +1,14 @@
 import { defineComponent as w, h as a } from "vue";
-import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as R, ElAutocomplete as S, ElSelect as O, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as v, ElDatePicker as P, ElTimePicker as $, ElTimeSelect as j, ElCascader as N, ElSlider as V, ElSwitch as q } from "element-plus";
+import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as O, ElAutocomplete as R, ElSelect as S, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as P, ElDatePicker as v, ElTimePicker as $, ElTimeSelect as j, ElCascader as N, ElSlider as V, ElSwitch as q } from "element-plus";
 const p = (e) => ({
   row: m,
   col: k,
   form: g,
   "form-item": F,
   input: E,
-  "input-number": R,
-  autocomplete: S,
-  select: O,
+  "input-number": O,
+  autocomplete: R,
+  select: S,
   option: x,
   "select-v2": L,
   "tree-select": A,
@@ -16,8 +16,8 @@ const p = (e) => ({
   checkbox: C,
   "radio-group": I,
   radio: B,
-  "radio-button": v,
-  date: P,
+  "radio-button": P,
+  date: v,
   time: $,
   "time-select": j,
   cascader: N,
@@ -97,7 +97,7 @@ const p = (e) => ({
       };
       return this.formList.forEach((o) => {
         var n, f, u, l, d;
-        let r = o.defaultValue ? o.defaultValue : s[o.type];
+        let r = o.hasOwnProperty("defaultValue") ? o.defaultValue : s[o.type];
         if (o.type === "date" ? (n = o.props) != null && n.type && ((u = (f = o.props) == null ? void 0 : f.type) == null ? void 0 : u.indexOf("range")) !== -1 && (r = []) : o.type === "time" && (d = (l = o.props) == null ? void 0 : l.type) != null && d.isRange && (r = ["", ""]), o.key) {
           let h = typeof o.disabled == "function" ? o.disabled(this.form, o) : o.disabled;
           t[o.key] = e && h ? t[o.key] : r;
@@ -246,7 +246,7 @@ const p = (e) => ({
     },
     getContent(e) {
       let t = "";
-      return typeof e.renderContent == "function" ? t = e.renderContent(a, e, this.form) : t = !e.key && !e.type ? "" : this.renderTagByName(e), t;
+      return typeof e.renderContent == "function" ? t = e.renderContent(a, e, this.form) : t = e.type ? this.renderTagByName(e) : "", t;
     },
     getFormItem(e, t) {
       if (e.isShow === !1 || typeof e.isShow == "function" && e.isShow(this.form, e) === !1)

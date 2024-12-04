@@ -108,7 +108,7 @@ const TataForm = defineComponent({
         'switch': false,
       }
       this.formList.forEach((item) => {
-        let defaultValue = item.defaultValue ? item.defaultValue : map[item.type];
+        let defaultValue = item.hasOwnProperty('defaultValue') ? item.defaultValue : map[item.type];
         if (item.type === 'date') {
           if (item.props?.type && item.props?.type?.indexOf('range') !== -1) {
             defaultValue = []
@@ -354,7 +354,7 @@ const TataForm = defineComponent({
         //   content = await content;
         // }
       } else {
-        content = !item.key && !item.type ? '' : this.renderTagByName(item)
+        content = !item.type ? '' : this.renderTagByName(item)
       }
       return content
     },

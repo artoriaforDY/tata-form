@@ -99,6 +99,9 @@ $ npm install tata-form -S
 
 ## 更新日志
 
+### 1.0.19
+1. 添加update:modelValue事件实时更新表单数据
+
 ### 1.0.17
 1. 渲染内容时没有type及key的项设为空值
 

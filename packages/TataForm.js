@@ -83,6 +83,14 @@ const TataForm = defineComponent({
       return rules
     }
   },
+  watch: {
+    form: {
+      handler(val) {
+        this.$emit('update:modelValue', val)
+      },
+      deep: true
+    }
+  },
   methods: {
     // 默认值
     initForm(isExclude) {

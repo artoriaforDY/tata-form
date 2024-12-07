@@ -1,5 +1,5 @@
 import { defineComponent as w, h as a } from "vue";
-import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as O, ElAutocomplete as R, ElSelect as S, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as P, ElDatePicker as v, ElTimePicker as $, ElTimeSelect as j, ElCascader as N, ElSlider as V, ElSwitch as q } from "element-plus";
+import { ElForm as g, ElRow as m, ElCol as k, ElFormItem as F, ElInput as E, ElInputNumber as O, ElAutocomplete as R, ElSelect as S, ElOption as x, ElSelectV2 as L, ElTreeSelect as A, ElCheckboxGroup as T, ElCheckbox as C, ElRadioGroup as I, ElRadio as B, ElRadioButton as P, ElDatePicker as v, ElTimePicker as $, ElTimeSelect as V, ElCascader as j, ElSlider as N, ElSwitch as q } from "element-plus";
 const p = (e) => ({
   row: m,
   col: k,
@@ -19,9 +19,9 @@ const p = (e) => ({
   "radio-button": P,
   date: v,
   time: $,
-  "time-select": j,
-  cascader: N,
-  slider: V,
+  "time-select": V,
+  cascader: j,
+  slider: N,
   switch: q
 })[e], D = w({
   name: "TataForm",
@@ -72,6 +72,14 @@ const p = (e) => ({
       return this.formList.forEach((t) => {
         this.isRequired(t) && (e[t.key] = t.rule);
       }), e;
+    }
+  },
+  watch: {
+    form: {
+      handler(e) {
+        this.$emit("update:modelValue", e);
+      },
+      deep: !0
     }
   },
   methods: {

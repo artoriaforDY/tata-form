@@ -1,6 +1,6 @@
 {
   "name": "tata-form",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Configuration element form",
   "main": "dist/tata-form.es.js",
   "scripts": {

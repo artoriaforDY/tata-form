@@ -302,7 +302,7 @@ const TataForm = defineComponent({
             {
               span: 24 / grid,
             },
-            [childrenItem]
+            () => [childrenItem]
           )
           childrenList.push(childrenParts)
         }
@@ -335,7 +335,7 @@ const TataForm = defineComponent({
             {
               span: 24 / grid,
             },
-            [childrenItem]
+            () => [childrenItem]
           )
           childrenList.push(childrenParts)
         }
@@ -349,7 +349,7 @@ const TataForm = defineComponent({
     getRow(childrenList) {
       return h(
         getPrefix('row'),
-        childrenList
+        () => childrenList
       )
     },
     getContent(item) {
@@ -446,7 +446,7 @@ const TataForm = defineComponent({
         return {
           label: option.text,
           value: option.value,
-          disabled: option.disabled
+          disabled: !!option.disabled
         }
       }
       let opts = []

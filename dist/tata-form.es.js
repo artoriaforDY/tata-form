@@ -209,7 +209,7 @@ const p = (e) => ({
             {
               span: 24 / s
             },
-            [d]
+            () => [d]
           );
           n.push(h);
         }
@@ -237,7 +237,7 @@ const p = (e) => ({
             {
               span: 24 / f
             },
-            [h]
+            () => [h]
           );
           n.push(y);
         }
@@ -249,7 +249,7 @@ const p = (e) => ({
     getRow(e) {
       return a(
         p("row"),
-        e
+        () => e
       );
     },
     getContent(e) {
@@ -308,7 +308,7 @@ const p = (e) => ({
       let t = (o) => ({
         label: o.text,
         value: o.value,
-        disabled: o.disabled
+        disabled: !!o.disabled
       }), s = [];
       switch (e.type) {
         case "select":

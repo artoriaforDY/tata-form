@@ -5,14 +5,14 @@
 ## 安装
 
 ```bash
-$ npm install tata-form -S
+$ npm install tata-form
 ```
 
 ## 快速开始
 
 ``` html
 <template>
-  <TataForm @submit="onSubmit" :formList="formList"></TataForm>
+  <TataForm @submitTataForm="onSubmit" :formList="formList"></TataForm>
 </template>
 
 <script setup>
